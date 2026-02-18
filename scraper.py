@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 import csv
 import os
 import sys
@@ -8,13 +8,14 @@ import sys
 URL = "https://www.dreamfit.es/centros/aluche"
 CSV_FILE = "aforo_dreamfit.csv"
 
-# Horario: 5:30 a 23:30 (hora Madrid)
 HORA_INICIO = (5, 30)
 HORA_FIN = (23, 30)
 
+def hora_madrid():
+    return datetime.now(timezone(timedelta(hours=1)))  # Cambiar a 2 en verano
+
 def dentro_de_horario():
-    from datetime import timezone, timedelta
-    madrid = datetime.now(timezone(timedelta(hours=1)))
+    madrid = hora_madrid()
     hora_actual = (madrid.hour, madrid.minute)
     return HORA_INICIO <= hora_actual <= HORA_FIN
 
@@ -29,7 +30,7 @@ def scrape_aforo():
     h3s = section.find_all("h3", class_="cliente")
     personas = h3s[0].contents[0].strip()
     aforo_total = h3s[1].contents[0].strip()
-    hora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    hora = hora_madrid().strftime("%Y-%m-%d %H:%M:%S")
 
     return {
         "hora": hora,
