@@ -2,8 +2,7 @@ import pandas as pd
 import plotly.graph_objects as go
 from datetime import datetime, timedelta
 
-carpeta = "C:/Users/mrosg/Desktop/Programación/scrapeo_aforo/"
-CSV_FILE = f"{carpeta}aforo_dreamfit.csv"
+CSV_FILE = "aforo_dreamfit.csv"
 
 # --- Cargar datos ---
 df = pd.read_csv(CSV_FILE)
@@ -90,5 +89,6 @@ fig.update_layout(
 fig.update_xaxes(showgrid=True, gridcolor="#eeeeee")
 fig.update_yaxes(showgrid=True, gridcolor="#eeeeee")
 
-fig.write_html(f"{carpeta}aforo_semana.html")
-fig.show()
+fig.write_html("aforo_semana.html")
+fig.write_image("aforo_semana.png")
+print("Visualización generada: aforo_semana.html y aforo_semana.png")
