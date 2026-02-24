@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-carpeta = "/Users/miguelrosgarcia/Desktop/Programación/Scraping/aforo_gimnasio/"
+carpeta = "//"
 
 # --- Cargar datos desde GitHub ---
 response = requests.get(
